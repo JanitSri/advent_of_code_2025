@@ -42,7 +42,6 @@ func contains[T comparable](a []T, x T) bool {
 			return true
 		}
 	}
-
 	return false
 }
 
@@ -53,7 +52,6 @@ func countDigits(i int) int {
 		i /= 10
 		r++
 	}
-
 	return r
 }
 
@@ -62,6 +60,5 @@ func splitDigitsInHalf(i int) []int {
 	mid := len(s) / 2
 	l, _ := strconv.Atoi(s[:mid])
 	r, _ := strconv.Atoi(s[mid:])
-
 	return []int{l, r}
 }
