@@ -47,7 +47,6 @@ func contains[T comparable](a []T, x T) bool {
 
 func countDigits(i int) int {
 	var r int
-
 	for i > 0 {
 		i /= 10
 		r++
