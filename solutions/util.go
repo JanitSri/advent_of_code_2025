@@ -1,15 +1,13 @@
 package solutions
 
 import (
-	"log"
 	"os"
 	"strconv"
-	"strings"
 )
 
-type Coord [2]int
+type coord [2]int
 
-var DirectionMap = map[string][2]int{
+var directionMap = map[string][2]int{
 	"up":        {-1, 0},
 	"upRight":   {-1, 1},
 	"right":     {0, 1},
@@ -20,29 +18,15 @@ var DirectionMap = map[string][2]int{
 	"upLeft":    {-1, -1},
 }
 
-func ReadFile(path string) string {
+func readFile(path string) (string, error) {
 	b, err := os.ReadFile(path)
-
 	if err != nil {
-		log.Fatalln("could not read file", path)
+		return "", err
 	}
-
-	return string(b)
+	return string(b), nil
 }
 
-func GetGrid(path string) ([]string, int, int) {
-	b, err := os.ReadFile(path)
-
-	if err != nil {
-		log.Fatalln("could not read file", path)
-	}
-
-	grid := strings.Split(string(b), "\n")
-
-	return grid, len(grid), len(grid[0])
-}
-
-func ResetGrid[T comparable](g [][]T, o, t T) {
+func resetGrid[T comparable](g [][]T, o, t T) {
 	for r := range g {
 		for c := range g[r] {
 			if g[r][c] == o {
@@ -52,7 +36,7 @@ func ResetGrid[T comparable](g [][]T, o, t T) {
 	}
 }
 
-func Contains[T comparable](a []T, x T) bool {
+func contains[T comparable](a []T, x T) bool {
 	for _, i := range a {
 		if i == x {
 			return true
@@ -62,7 +46,7 @@ func Contains[T comparable](a []T, x T) bool {
 	return false
 }
 
-func CountDigits(i int) int {
+func countDigits(i int) int {
 	var r int
 
 	for i > 0 {
@@ -73,11 +57,11 @@ func CountDigits(i int) int {
 	return r
 }
 
-func SplitDigitsInHalf(i int) []int {
+func splitDigitsInHalf(i int) []int {
 	s := strconv.Itoa(i)
-	n := CountDigits(i) / 2
-	l, _ := strconv.Atoi(s[:n])
-	r, _ := strconv.Atoi(s[n:])
+	mid := len(s) / 2
+	l, _ := strconv.Atoi(s[:mid])
+	r, _ := strconv.Atoi(s[mid:])
 
 	return []int{l, r}
 }

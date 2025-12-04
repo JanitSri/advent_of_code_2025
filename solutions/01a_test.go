@@ -7,7 +7,11 @@ import (
 )
 
 func aoc01a(t *testing.T) int {
-	f := ReadFile("../inputs/01.txt")
+	f, err := readFile("../inputs/01.txt")
+	if err != nil {
+		t.Error("could not read file", err)
+	}
+
 	lines := strings.Split(f, "\n")
 
 	current := 50
